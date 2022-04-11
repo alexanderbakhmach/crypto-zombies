@@ -304,12 +304,9 @@ contract Zombie is Utils , IERC721Metadata, IERC721Enumerable {
      * Use along with {balanceOf} to enumerate all of ``owner``'s tokens.
      */
     function tokenOfOwnerByIndex(address owner, uint256 index) external view override returns (uint256) {
-        uint256 zombieTokenId = _ownerAddressToOwnedZombies2Indexes[owner][index];
+        require(_zombieOwnerAddressToZombiesCount[owner] > index, "Zombie: Owner zombies count must be bigger then index.");
 
-        require(owner != address(0), "Zombie: Owner must not be 0 address.");
-        require(_zombieIdToOwnerAddress[zombieTokenId] == owner, "The token id on idex must be owned by owner.");
-
-        return zombieTokenId;
+        return _ownerAddressToOwnedZombies2Indexes[owner][index];
     }
 
     /**
