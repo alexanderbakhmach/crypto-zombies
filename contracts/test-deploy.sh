@@ -1,0 +1,1 @@
+brownie run ./scripts/1_deploy.py --network rinkeby
